@@ -120,16 +120,3 @@ async def extract_event_id(event_name):
             return 404
     finally:
         connection.close()
-
-async def events_soon():
-          connection = mysql.connector.connect(
-            host=host,
-            port = port,
-            user=user,
-            passwd=password,
-            database=db_name
-        )
-    cursor = connection.cursor()
-    try:
-        date_now = datetime.now()
-        cursor.execute("SELECT name, description, e_date, image FROM events WHERE e_date - (%s)<", [date_now])
