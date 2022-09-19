@@ -8,22 +8,28 @@ from keyboards.inline_keyboards import TiosMenu, SubMenu
 
 async def WelcomeProcess(message: types.Message):
 	#Получить id пользователя и проверить есть ли он в списках администрации
+	await message.delete()
 	await message.answer(f"{message.from_user.full_name} something welcome text", reply_markup = MainMenu)
 
 async def NotsNilProcess(message: types.Message):
+	await message.delete()
 	await message.answer("smthng nots nil info", reply_markup = MenuNotsNil)
 
 async def ContactsProcess(message: types.Message):
+	await message.delete()
 	await message.answer("smthng contacts", reply_markup = MainMenu)
 
 async def AboutProcess(message: types.Message):
+	await message.delete()
 	await message.answer("smthng about", reply_markup = MainMenu)
 
 async def SubsProcess(message: types.Message):
+	await message.delete()
 	await message.answer("destroy keyboards", reply_markup = types.ReplyKeyboardRemove())
 	await message.answer("smthng subs main", reply_markup = SubMenu)
 
 async def TiosProcess(message: types.Message):
+	await message.delete()
 	await message.answer("destroy keyboards", reply_markup = types.ReplyKeyboardRemove())
 	await message.answer("smthng tios words", reply_markup = TiosMenu)
 
