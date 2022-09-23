@@ -5,6 +5,17 @@ from create_bot import dp, bot
 from aiogram.dispatcher.filters import Text
 from keyboards.reply_keyboards import MainMenu, MenuNotsNil
 from keyboards.inline_keyboards import TiosMenu, SubMenu
+from aiogram.dispatcher import FSMContext
+from aiogram.dispatcher.filters.state import State, StatesGroup
+
+
+async def BackProcess(message : types.Message, state : FSMContext):
+	StateNow = await state.get_state()
+	if StateNow is None:
+		await message.answer('return to main menu', reply_markup = MainMenu)
+		return
+	await message.answer('return to main menu', reply_markup = MainMenu)
+	await state.finish()
 
 async def WelcomeProcess(message: types.Message):
 	#Получить id пользователя и проверить есть ли он в списках администрации
@@ -51,6 +62,7 @@ async def TiosCallback(callback : types.CallbackQuery):
 
 
 def register_SimpleHandlers(dp : Dispatcher):
+	dp.register_message_handler(BackProcess, commands = 'Назад', state = "*")
 	dp.register_message_handler(WelcomeProcess, commands=['Start'])
 	dp.register_message_handler(NotsNilProcess, commands=['НОЦЫ_НИЛЫ'])
 	dp.register_message_handler(ContactsProcess, commands=['Контакты'])
