@@ -14,4 +14,6 @@ NotsNilButton_3 = KeyboardButton('Прочее')
 NotsNilButton_4 = KeyboardButton('Назад')
 MenuNotsNil = ReplyKeyboardMarkup(resize_keyboard=True).row(NotsNilButton_1, NotsNilButton_2, NotsNilButton_3).row(NotsNilButton_4)
 
-
+EventTypeButton_1 = KeyboardButton('Внутреннее')
+EventTypeButton_2 = KeyboardButton('Внешнее')
+EventTypeMenu = ReplyKeyboardMarkup(resize_keyboard = True).row(EventTypeButton_1, EventTypeButton_2)
