@@ -24,7 +24,7 @@ def create_connection():
 #################################################################################################################
 #команда для добавления мероприятия в базу данных : await add_event("Я - Мероприятие", "Я - Описание", "Я - дата в формате 2022/11/08 15:30:00", "Я - адрес фотографии")
 #################################################################################################################
-async def add_event(name,type_, description, dat, img, tags):
+async def add_event(name,type_, description, dat, img, tags, web_source):
     connection = mysql.connector.connect(
             host=host,
             port = port,
@@ -34,14 +34,9 @@ async def add_event(name,type_, description, dat, img, tags):
         )
     cursor = connection.cursor()
     try:
-        if tags == 0:
-            cursor.execute("INSERT INTO events(name, locate, description, e_date, image) VALUES (%s, %s, %s, %s, %s)", [name, type_, description, dat, img]) 
-            connection.commit()
-            return 1
-        else:
-            cursor.execute("INSERT INTO events(name, locate, description, e_date, image, tags) VALUES (%s, %s, %s, %s, %s, %s)", [name, type_, description, dat, img, tags]) 
-            connection.commit()
-            return 1
+        cursor.execute("INSERT INTO events(name, locate, description, e_date, image, tags, web_source) VALUES (%s, %s, %s, %s, %s, %s, %s)", [name, type_, description, dat, img, tags, web_source]) 
+        connection.commit()
+        return 1
 
     finally:
         connection.close()
