@@ -46,7 +46,11 @@ async def UploadDescription(message : types.Message, state : FSMContext):
 	await CreatingSteps.next()
 
 async def UploadDate(message : types.Message, state : FSMContext):
-	await state.update_data(date = message.text)
+	old_date = (message.text).split('-')
+	year = old_date[2].split(' ')[0]
+	time = old_date[2].split(' ')[1]
+	new_date = "" + year + '-' + old_date[1] + '-' + old_date[0] + ' ' + time 
+	await state.update_data(date = new_date)
 	await message.answer('send web resourse or "нет"')
 	await CreatingSteps.next()
 
@@ -104,7 +108,7 @@ def register_CreatingEventHandler(dp : Dispatcher):
 	dp.register_message_handler(UploadTitle, state = CreatingSteps.Title)
 	dp.register_message_handler(ChooseType, state = CreatingSteps.Type)
 	dp.register_message_handler(UploadDescription, state = CreatingSteps.Description)
-	dp.register_message_handler(UploadDate, lambda message: re.findall(r"(\d{4}-\d{1,2}-\d{1,2}\s\d{1,2}:\d{1,2})",message.text), state = CreatingSteps.Date)
+	dp.register_message_handler(UploadDate, lambda message: re.findall(r"(\d{1,2}-\d{1,2}-\d{4}\s\d{1,2}:\d{1,2})",message.text), state = CreatingSteps.Date)
 	dp.register_message_handler(ErrDate, state = CreatingSteps.Date)
 	dp.register_message_handler(UploadWebSource, lambda message: re.search(r'(https?://[\S]+)', message.text), state = CreatingSteps.WebSource)
 	dp.register_message_handler(ErrWebSource, state = CreatingSteps.WebSource)
