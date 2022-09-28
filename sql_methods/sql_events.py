@@ -37,7 +37,6 @@ async def add_event(name,type_, description, dat, img, tags, web_source):
         cursor.execute("INSERT INTO events(name, locate, description, e_date, image, tags, web_source) VALUES (%s, %s, %s, %s, %s, %s, %s)", [name, type_, description, dat, img, tags, web_source]) 
         connection.commit()
         return 1
-
     finally:
         connection.close()
 
@@ -55,7 +54,7 @@ async def extract_events():
     cursor = connection.cursor()
     try:
         date_now = datetime.now()
-        cursor.execute("SELECT name, description, e_date, image FROM events WHERE e_date >= (%s)", [date_now])
+        cursor.execute("SELECT name, description, e_date, image, tags, web_source FROM events WHERE e_date >= (%s)", [date_now])
         response = cursor.fetchall()
         if len(response) > 0:
             return response
