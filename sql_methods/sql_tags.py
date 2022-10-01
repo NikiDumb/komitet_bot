@@ -45,4 +45,4 @@ def create_sub_list(list_name, columns):
         connection.close()
 
 
-create_sub_list(1, 'photo')
+create_sub_list(100, 'log/photo/name/course')

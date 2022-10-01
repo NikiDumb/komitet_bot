@@ -36,7 +36,7 @@ async def AboutProcess(message: types.Message):
 
 async def SubsProcess(message: types.Message):
 	await message.delete()
-	await message.answer("destroy keyboards", reply_markup = types.ReplyKeyboardRemove())
+	await message.answer("gaaaay", reply_markup = types.ReplyKeyboardRemove())
 	await message.answer("smthng subs main", reply_markup = SubMenu)
 
 async def TiosProcess(message: types.Message):
